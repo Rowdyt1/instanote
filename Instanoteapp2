@@ -1,0 +1,26 @@
+import requests
+
+# Replace with your own access token
+access_token = "YOUR_ACCESS_TOKEN"
+
+# Get a list of saved posts
+def get_saved_posts(access_token):
+    url = f"https://api.instagram.com/v1/posts/saved?access_token={access_token}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        saved_posts = response.json()
+        return saved_posts
+    else:
+        return None
+
+# Example usage
+saved_posts = get_saved_posts(access_token)
+if saved_posts:
+    for post in saved_posts:
+        print("Post ID:", post["id"])
+        print("Caption:", post["caption"])
+        print("Image URL:", post["image_url"])
+        print("Video URL:", post["video_url"])
+        print("=" * 20)
+else:
+    print("Unable to retrieve saved posts.")
