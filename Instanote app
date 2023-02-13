@@ -1,0 +1,21 @@
+import requests
+
+# Use the Instagram API to get information about a specific post
+def get_post_info(post_id):
+    url = f"https://api.instagram.com/v1/posts/{post_id}?access_token=ACCESS_TOKEN"
+    response = requests.get(url)
+    if response.status_code == 200:
+        post_data = response.json()
+        return post_data
+    else:
+        return None
+
+# Example usage
+post_id = "1234567890"
+post_info = get_post_info(post_id)
+if post_info:
+    print("Caption:", post_info["caption"])
+    print("Image URL:", post_info["image_url"])
+    print("Video URL:", post_info["video_url"])
+else:
+    print("Unable to retrieve post information.")
